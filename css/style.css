@@ -1,0 +1,30 @@
+/* Basic layout */
+* { box-sizing: border-box; font-family: system-ui, Arial, sans-serif; }
+body { margin: 0; background: #0f1115; color: #e9edf1; }
+.topbar { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: #171a21; }
+.brand { font-weight: 700; }
+.btn { background: #2d6cdf; color: #fff; border: 0; padding: 8px 12px; border-radius: 6px; cursor: pointer; }
+.btn:hover { opacity: 0.9; }
+.link_btn { background: transparent; border: 0; color: #9cc3ff; cursor: pointer; }
+.content { padding: 24px; }
+.userbox { display: flex; gap: 12px; align-items: center; }
+
+/* Backdrop & Modal (as per lecture: hidden by default, z-index layering) */
+.backdrop {
+  display: none;
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 998;
+}
+.modal {
+  display: none;
+  position: fixed; top: 10%; left: 50%; transform: translateX(-50%);
+  width: 360px; background: #1f2430; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  z-index: 999; padding: 16px;
+}
+.modal_header { display: flex; justify-content: space-between; align-items: center; }
+.close_btn { background: transparent; border: 0; color: #e9edf1; font-size: 22px; cursor: pointer; }
+.field { margin: 10px 0; }
+.field input { width: 100%; padding: 8px; border-radius: 6px; border: 1px solid #394150; background: #0f1320; color: #e9edf1; }
+.actions { margin-top: 12px; display: flex; gap: 8px; align-items: center; }
+.response { margin-top: 8px; min-height: 20px; font-size: 0.95em; }

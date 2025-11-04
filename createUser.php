@@ -1,5 +1,4 @@
 <?php
-// createUser.php
 require __DIR__ . '/db.php';
 
 // Extract POST

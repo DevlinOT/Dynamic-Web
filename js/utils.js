@@ -9,7 +9,7 @@ function closeLogin() {
   document.getElementById('login_modal').style.display = 'none';
 }
 
-// Switch between Login and Create User (keeps modal open, like notes)
+// Switch between Login and Create User (keeps modal open)
 function switchToCreate() {
   document.getElementById('modal_title').innerText = 'Create Account';
   document.getElementById('modal_body').innerHTML = `
@@ -60,7 +60,7 @@ function switchToLogin() {
   `;
 }
 
-// Fetch: LOGIN (returns JSON per lecture)
+// Fetch: LOGIN (returns JSON)
 async function loginUser(e) {
   e.preventDefault();
   const form = e.target;
@@ -79,10 +79,10 @@ async function loginUser(e) {
     out.style.color = '#ff9aa2';
     out.textContent = json.message || 'Login failed';
   }
-  return false; // keep modal open on failure (like notes)
+  return false; // keep modal open on failure 
 }
 
-// Fetch: CREATE USER (returns text per lecture)
+// Fetch: CREATE USER (returns text)
 async function createUser(e) {
   e.preventDefault();
   const form = e.target;

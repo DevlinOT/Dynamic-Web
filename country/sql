@@ -9,3 +9,9 @@ CREATE TABLE countries (
     continent VARCHAR(50),
     region VARCHAR(100)                -- e.g. "Southern Europe"
 );
+
+
+
+
+
+

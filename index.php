@@ -12,8 +12,11 @@ $loggedInUser = $_SESSION['username'] ?? null;
 </head>
 
 <body>
+ 
+
   <header class="topbar">
     <div class="brand">🎬 Crossover Hub</div>
+    <?php include 'navbar.php'; ?>
     <div class="userbox" id="userbox">
       <?php if ($loggedInUser): ?>
         <span>Hi, <strong><?= htmlspecialchars($loggedInUser) ?></strong></span>
@@ -90,5 +93,52 @@ $loggedInUser = $_SESSION['username'] ?? null;
   </div>
 
   <script src="js/utils.js"></script>
+
+  <script>
+const searchInput = document.querySelector('.searchbar input');
+const dropdown = document.createElement('ul');
+dropdown.className = 'search-dropdown';
+searchInput.parentNode.appendChild(dropdown);
+
+let controller;
+
+searchInput.addEventListener('input', async () => {
+  const q = searchInput.value.trim();
+  if (controller) controller.abort();
+  dropdown.innerHTML = '';
+  if (!q) return;
+
+  controller = new AbortController();
+  try {
+    const res = await fetch(`search_suggest.php?q=${encodeURIComponent(q)}`, {
+      signal: controller.signal
+    });
+    const suggestions = await res.json();
+
+    if (!Array.isArray(suggestions) || suggestions.length === 0) return;
+
+    suggestions.forEach(title => {
+      const li = document.createElement('li');
+      li.textContent = title;
+      li.addEventListener('mousedown', () => {
+        // Fill input and submit form when clicked
+        searchInput.value = title;
+        searchInput.closest('form').submit();
+      });
+      dropdown.appendChild(li);
+    });
+  } catch (err) {
+    if (err.name !== 'AbortError') console.error(err);
+  }
+});
+
+// Hide dropdown when clicking elsewhere
+document.addEventListener('click', (e) => {
+  if (!searchInput.contains(e.target) && !dropdown.contains(e.target)) {
+    dropdown.innerHTML = '';
+  }
+});
+</script>
+
 </body>
 </html>

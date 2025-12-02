@@ -8,7 +8,7 @@
 <body>
 
 <?php
-$conn = new mysqli("localhost", "root", "root", NULL, 8889);
+$conn = new mysqli("localhost", "root", "", NULL, 3307);
 
 $dbname = "movie_game_db";
 
@@ -23,7 +23,7 @@ $conn->query($sql);
 $conn->close();
 
 // Reconnect to new DB
-$conn = new mysqli("localhost", "root", "root", $dbname, 8889);
+$conn = new mysqli("localhost", "root", "", $dbname, 3307);
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
@@ -123,14 +123,15 @@ $conn->query($sql);
 $sql = "INSERT INTO Games (title, release_year, genre, director, platform, image_url, description, link) VALUES
 ('The Last of Us', 2013, 'Action-Adventure', 'Naughty Dog', 'PlayStation', 'https://cdn.mobygames.com/covers/8373278-the-last-of-us-playstation-3-front-cover.jpg', 'A post-apocalyptic survival story.', 'link1'),
 ('Pokémon Detective Pikachu', 2016, 'Adventure', 'Creatures Inc.', 'Nintendo 3DS', 'https://cdn.mobygames.com/covers/6255136-pokemon-detective-pikachu-nintendo-3ds-front-cover.jpg', 'Solve mysteries with Pikachu.', 'link2'),
-('Tomb Raider', 2013, 'Action-Adventure', 'Crystal Dynamics', 'Multi-platform', 'https://cdn.mobygames.com/covers/4082270-tomb-raider-windows-front-cover.jpg', 'Lara Croft’s origin reboot.', 'link3'),
+('Tomb Raider', 2013, 'Action-Adventure', 'Crystal Dynamics', 'Multi-platform', 'https://cdn.mobygames.com/covers/4082270-tomb-raider-windows-front-cover.jpg', 'Lara Croft''s origin reboot.', 'link3'),
 ('Warcraft', 1994, 'Strategy', 'Blizzard Entertainment', 'PC', 'https://cdn.mobygames.com/covers/4917497-warcraft-orcs-humans-dos-front-cover.jpg', 'Fantasy real-time strategy.', 'link4'),
 ('Sonic the Hedgehog', 1991, 'Platformer', 'Sega', 'Genesis', 'https://cdn.mobygames.com/covers/6171273-sonic-the-hedgehog-sega-genesis-front-cover.jpg', 'Fast-paced platforming.', 'link5'),
-('Uncharted 4: A Thief’s End', 2016, 'Action-Adventure', 'Naughty Dog', 'PlayStation', 'https://cdn.mobygames.com/covers/6302621-uncharted-4-a-thiefs-end-playstation-4-front-cover.jpg', 'Nathan Drake’s final adventure.', 'link6'),
+('Uncharted 4: A Thief''s End', 2016, 'Action-Adventure', 'Naughty Dog', 'PlayStation', 'https://cdn.mobygames.com/covers/6302621-uncharted-4-a-thiefs-end-playstation-4-front-cover.jpg', 'Nathan Drake''s final adventure.', 'link6'),
 ('Resident Evil', 1996, 'Horror', 'Capcom', 'PlayStation', 'https://cdn.mobygames.com/covers/6662048-resident-evil-playstation-front-cover.jpg', 'Survive the zombie outbreak.', 'link7'),
 ('Prince of Persia: The Sands of Time', 2003, 'Action', 'Ubisoft Montreal', 'Multi-platform', 'https://cdn.mobygames.com/covers/3601328-prince-of-persia-the-sands-of-time-windows-front-cover.jpg', 'Use time to solve puzzles and fight enemies.', 'link8'),
 ('Mortal Kombat', 1992, 'Fighting', 'Midway Games', 'Arcade', 'https://cdn.mobygames.com/covers/6813791-mortal-kombat-arcade-front-cover.jpg', 'Brutal fighting tournament.', 'link9'),
-('Assassin’s Creed II', 2009, 'Action-Adventure', 'Ubisoft', 'Multi-platform', 'https://cdn.mobygames.com/covers/7766067-assassins-creed-ii-windows-front-cover.jpg', 'Ezio’s journey through Renaissance Italy.', 'link10');";
+('Assassin''s Creed II', 2009, 'Action-Adventure', 'Ubisoft', 'Multi-platform', 'https://cdn.mobygames.com/covers/7766067-assassins-creed-ii-windows-front-cover.jpg', 'Ezio''s journey through Renaissance Italy.', 'link10');";
+
 $conn->query($sql);
 
 $conn->close();

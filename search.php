@@ -26,7 +26,7 @@ if ($q !== '') {
 <head>
   <meta charset="utf-8">
   <title>Search results</title>
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/style.css">
   <style>
     .results { max-width: 980px; margin: 24px auto; padding: 0 20px; }
     .res-grid { display:grid; grid-template-columns: repeat(auto-fill,minmax(220px,1fr)); gap:18px; }
@@ -37,10 +37,12 @@ if ($q !== '') {
   </style>
 </head>
 <body>
+  <?php include 'navbar.php'; ?>
+
   <div class="results">
     <h2>Results for “<?= htmlspecialchars($q) ?>”</h2>
     <?php if (!$q): ?>
-      <p>Type something in the search box.</p>
+      <p>bing.</p>
     <?php elseif (!$results): ?>
       <p>No results found.</p>
     <?php else: ?>

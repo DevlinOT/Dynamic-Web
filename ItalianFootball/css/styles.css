@@ -1,0 +1,265 @@
+/* =========================== */
+/* GENERAL STYLES */
+/* =========================== */
+
+body {
+    background-color: #0A36AF;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+}
+
+div {
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.hover-pointer {
+    cursor: pointer;
+    color: black;
+}
+
+.hover-pointer:hover {
+    color: blue;
+}
+
+/* =========================== */
+/* TABLE STYLES */
+/* =========================== */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    color: #333;
+    text-align: left;
+}
+
+th {
+    background-color: #023cfa;
+    color: white;
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+tr {
+    transition: background-color 0.3s;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: left;
+    vertical-align: top;
+}
+
+#form-cell {
+    width: 40%;
+    border-right: 1px solid #ccc;
+}
+
+#response-cell {
+    width: 60%;
+}
+
+/* =========================== */
+/* FORM STYLES */
+/* =========================== */
+
+#club_form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;              /* space between sections */
+    padding: 15px;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#club_form select {
+    width: 48%;
+    padding: 12px 15px;
+    margin-right: 4%;        /* small space between dropdowns */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+#club_form select:last-child {
+    margin-right: 0;          /* remove margin on last select */
+}
+
+/* Population input section */
+.stadium-range {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap; /* allows wrapping on small screens */
+}
+
+.capacity-field {
+    display: flex;
+    flex-direction: column; /* label above input */
+    width: 150px;           /* fixed width for each field */
+}
+
+.capacity-field label {
+    color: black;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.capacity-field input {
+    padding: 8px 10px;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    font-size: 14px;
+    width: 100%; /* input fills the field container */
+    box-sizing: border-box;
+}
+
+
+/* =========================== */
+/* football CONTAINER & ITEMS */
+/* =========================== */
+
+.football-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: 1000px;
+    margin: auto;
+}
+
+.football-image {
+    width: 75%;
+    height: auto;
+    border-radius: 8px;
+    border: 1px solid black;
+}
+
+.football-info {
+    margin: 8px 0;
+    color: black;
+    font-weight: bold;
+}
+
+.result-count {
+    color: white;
+}
+
+.football-card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 16px;
+    width: 150px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    margin: 10px; /* optional spacing between cards */
+}
+
+
+
+/*Colour Checkbox CSS*/
+
+.colour-checkboxes {
+    margin: 10px 0;
+}
+
+.colour-checkboxes b {
+    display: block;        /* label on its own line */
+    margin-bottom: 8px;    /* space below label */
+    font-size: 16px;
+    color: black;          /* label text black */
+}
+
+.colour-checkboxes label {
+    display: inline-flex;  /* inline, but aligns checkbox and text nicely */
+    align-items: center;
+    gap: 6px;              /* space between checkbox and text */
+    margin-right: 12px;    /* spacing between checkboxes */
+    font-size: 14px;
+    color: black;          /* checkbox text black */
+    background-color: #f0f0f0; /* subtle box behind each checkbox */
+    padding: 5px 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.colour-checkboxes label:hover {
+    background-color: #e0e0e0; /* slight hover effect */
+}
+
+.colour-checkboxes input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #4234ff; /* makes the checkmark colored */
+    cursor: pointer;
+}
+
+#backdrop {
+  display: none;
+  position: fixed;
+  background: rgba(0,0,0,0.5);
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: 1;
+}
+
+#club_modal {
+  display: none;
+  position: fixed;
+  background: white;
+  padding: 10px;
+  min-height: 20vh;
+  width: 800px;           /* remove quotes */
+  top: 100px;             /* distance from top */
+  left: 50%;              /* start at horizontal center */
+  transform: translateX(-50%); /* shift back half width */
+  z-index: 2;
+  text-align: center;
+  font-size: 20px;
+  border: #0d2bae 10px solid;
+  border-radius: 8px;
+}
+
+
+/*For the country map and card container*/
+
+.stadium-map-container {
+    display: flex;
+    align-items: flex-start; /* aligns top of card and map */
+    gap: 10px;               /* smaller gap between card and map */
+}
+
+.stadium-map-container .football-container {
+    flex: 0 0 250px;         /* fixed width for card column */
+    margin: 0;
+    padding: 0;
+}
+
+.stadium-map-container .football-card {
+    margin: 0 0 10px 0;      /* spacing between multiple cards if needed */
+    padding: 16px;
+    font-size: 12px;         /* same as other cards */
+}
+
+.stadium-map-container .country-map {
+    flex: 1;                 /* map takes remaining space */
+    min-width: 400px;
+    height: 300px;
+    border-radius: 8px;
+    border: 0;
+    margin: 0;
+}
+

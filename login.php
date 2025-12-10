@@ -20,10 +20,11 @@ $result = $stmt->get_result();
 
 if ($user = $result->fetch_assoc()) {
   // Verify hashed password
-  if (password_verify($password, $user['password_hash'])) {
-    $_SESSION['username'] = $user['username']; // store in session
+ if (password_verify($password, $user['password_hash'])) {
+    $_SESSION['user_id']  = $user['user_id'];   // NEW
+    $_SESSION['username'] = $user['username'];  // keep this too
     echo json_encode(['success' => true, 'message' => 'Login successful.']);
-  } else {
+} else {
     echo json_encode(['success' => false, 'message' => 'Invalid password.']);
   }
 } else {

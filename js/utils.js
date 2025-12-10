@@ -96,3 +96,31 @@ async function createUser(e) {
   // keep modal open so they can switch to Login
   return false;
 }
+
+
+async function logout() {
+  try {
+    // Send a POST request to logout.php
+    const response = await fetch('logout.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+
+    const data = await response.json();
+
+    if (data.success) {
+      // Update header dynamically
+      const userbox = document.getElementById('userbox');
+      userbox.innerHTML = `
+        <button class="btn" id="loginBtn" onclick="openLogin()">Login</button>
+      `;
+      console.log('Logged out successfully');
+    } else {
+      console.error('Logout failed');
+    }
+  } catch (error) {
+    console.error('Error:', error);
+  }
+}

@@ -64,6 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="utf-8">
     <title>Add Review</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/jpg" href="images/favicon.jpg">
 </head>
 <body>
 <?php include 'navbar.php'; ?>

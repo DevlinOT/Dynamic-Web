@@ -24,6 +24,7 @@ if ($q !== '') {
 <!doctype html>
 <html>
 <head>
+  <link rel="icon" type="image/jpg" href="images/favicon.jpg">
   <meta charset="utf-8">
   <title>Search results</title>
   <link rel="stylesheet" href="css/style.css">

@@ -1,0 +1,330 @@
+/* Basic layout */
+* { box-sizing: border-box; font-family: system-ui, Arial, sans-serif; }
+body { margin: 0; background: #0f1115; color: #e9edf1; }
+.topbar { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: #171a21; }
+.brand { font-weight: 700; }
+.btn { background: #2d6cdf; color: #fff; border: 0; padding: 8px 12px; border-radius: 6px; cursor: pointer; }
+.btn:hover { opacity: 0.9; }
+.link_btn { background: transparent; border: 0; color: #9cc3ff; cursor: pointer; }
+.content { padding: 24px; }
+.userbox { display: flex; gap: 12px; align-items: center; }
+
+/* Backdrop & Modal  */
+.backdrop {
+  display: none;
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 998;
+}
+.modal {
+  display: none;
+  position: fixed; top: 10%; left: 50%; transform: translateX(-50%);
+  width: 360px; background: #1f2430; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  z-index: 9999; padding: 16px;
+}
+.modal_header { display: flex; justify-content: space-between; align-items: center; }
+.close_btn { background: transparent; border: 0; color: #e9edf1; font-size: 22px; cursor: pointer; }
+.field { margin: 10px 0; }
+.field input { width: 100%; padding: 8px; border-radius: 6px; border: 1px solid #394150; background: #0f1320; color: #e9edf1; }
+.actions { margin-top: 12px; display: flex; gap: 8px; align-items: center; }
+.response { margin-top: 8px; min-height: 20px; font-size: 0.95em; }
+
+/* Search section */
+.search-section {
+  max-width: 980px;
+  margin: 48px auto 56px;
+  padding: 0 20px;
+}
+
+.search-title {
+  font-size: 40px;
+  font-weight: 600;
+  text-align: center;
+  margin: 12px 0 22px;
+}
+
+/* Search bar */
+.searchbar {
+  position: relative;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.searchbar .icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #808080;
+  pointer-events: none;
+}
+
+.searchbar input {
+  width: 100%;
+  height: 44px;
+  border-radius: 9999px;
+  border: 1px solid #e5e7eb;
+  background: #fff;
+  padding: 0 48px;              /* space for icon + room on right */
+  text-align: center;           /* centered placeholder like screenshot */
+  font-size: 16px;
+  outline: none;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+}
+
+.searchbar input::placeholder { color: #9aa3af; }
+.searchbar input:focus {
+  border-color: #d1d5db;
+  box-shadow: 0 0 0 3px rgba(59,130,246,0.15);
+}
+
+/* Popular row */
+.popular { margin-top: 32px; }
+.popular-label { font-size: 16px; margin: 10px 0 14px; }
+.popular-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 28px;
+}
+
+.thumb {
+  aspect-ratio: 1 / 1;
+  border: 2px solid #1f2937;
+  border-radius: 12px;
+  background:
+    linear-gradient(#fff,#fff) padding-box,
+    linear-gradient(135deg,#f3f4f6,#e5e7eb) border-box;
+  display: grid;
+  place-items: center;
+  color: #111827;
+  position: relative;
+}
+
+/* simple “image” glyph */
+.thumb::before, .thumb::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+}
+.thumb::before { width: 10px; height: 10px; left: 14px; top: 14px; background: #111827; }
+.thumb::after {
+  content: "";
+  width: 60%;
+  height: 60%;
+  border: 3px solid #111827;
+  border-top: none; border-left: none;
+  transform: rotate(45deg);
+  bottom: 14px; right: 14px;
+}
+
+/* Responsive */
+@media (max-width: 900px) { .popular-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 520px) { .popular-grid { grid-template-columns: 1fr; } }
+
+.search-dropdown {
+  position: absolute;
+  top: 48px; /* just below input */
+  left: 0;
+  right: 0;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  list-style: none;
+  margin: 4px 0 0;
+  padding: 4px 0;
+  z-index: 10;
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.search-dropdown li {
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 15px;
+  color: #111827;
+}
+
+.search-dropdown li:hover {
+  background: #f3f4f6;
+}
+
+/* Simple top nav */
+.nav { display:flex; gap:16px; justify-content:flex-end; padding:12px 16px; }
+.nav a { color:#ffffff; text-decoration:none; padding:6px 10px; border-radius:8px; }
+.nav .active { background:#f1f5f9; }
+
+/* Page layout: sidebar filters + content */
+.page { max-width: 1100px; margin: 20px auto; padding: 0 16px; display: grid; grid-template-columns: 240px 1fr; gap: 24px; }
+.filters { background:#fff; border:1px solid #e5e7eb; border-radius:12px; padding:14px; height: fit-content; }
+.filter-form { display:grid; gap:12px; }
+.filter-form label { display:grid; gap:6px; font-weight:600; }
+.filter-form select { padding:8px; border:1px solid #d1d5db; border-radius:8px; background:#fff; }
+.filter-actions { display:flex; gap:10px; align-items:center; margin-top:4px; }
+.filter-actions button { padding:8px 12px; border:0; border-radius:8px; background:#2563eb; color:#fff; cursor:pointer; }
+.filter-actions .reset { color:#6b7280; text-decoration:none; }
+
+/* Cards grid */
+.content h2 { margin:6px 0 16px; }
+.grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(260px,1fr)); gap:20px; }
+.card { background:#fff; border:1px solid #e5e7eb; border-radius:12px; overflow:hidden; }
+.card img { width:100%; height:220px; object-fit:cover; background:#eee; display:block; }
+.card .meta { padding:12px; }
+.muted { color:#6b7280; font-size:13px; margin:6px 0 0; }
+.badges { display:flex; gap:8px; flex-wrap:wrap; margin-top:8px; }
+.badges span { background:#f3f4f6; border:1px solid #e5e7eb; border-radius:999px; padding:2px 8px; font-size:12px; color:#374151; }
+
+/* Responsive */
+@media (max-width: 860px) {
+  .page { grid-template-columns: 1fr; }
+}
+
+.nav {
+    display: flex;
+    gap: 16px;
+    justify-content: flex-end;
+    padding: 12px 16px;
+    
+   
+}
+
+.nav a {
+    color: #ffffff;
+    text-decoration: none;
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+.nav a:hover {
+    background: #7d89a1;
+}
+
+.nav .active {
+    background: #e2e8f0;
+}
+
+
+/* Reviews Page Layout */
+.reviews-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 0 16px;
+}
+
+/* Sort Bar */
+.sort-bar {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.sort-bar label {
+    font-weight: 600;
+}
+.sort-bar select {
+    padding: 6px 10px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+}
+
+/* Review Card */
+.review-card {
+    display: flex;
+    gap: 20px;
+    padding: 16px;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    background: #fff;
+}
+
+.review-image img {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    background: #eee;
+    border-radius: 6px;
+}
+
+.review-content h3 {
+    margin: 0;
+    font-size: 20px;
+    color: #0f1115;
+}
+.review-content p {
+    color: #4b5563;
+    margin: 8px 0 0;
+}
+
+.review-meta {
+    margin-left: auto;
+    text-align: right;
+}
+.review-label {
+    font-weight: 600;
+}
+.rating span {
+    font-size: 18px;
+    color: #111;
+}
+
+/* Bottom filter bar */
+.review-filter-bar {
+    position: fixed;        /* ← keeps it on screen */
+    bottom: 0;              /* stick to bottom */
+    left: 0;
+    right: 0;
+
+    background: #f3eaff;
+    padding: 16px;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+
+    border-radius: 12px 12px 0 0;   /* rounded top corners */
+    border-top: 1px solid #d4c4ff;
+    z-index: 999;           /* stays above page content */
+
+    /* optional */
+    backdrop-filter: blur(6px);
+}
+
+
+.review-filter-bar a {
+    padding: 8px 14px;
+    border-radius: 20px;
+    text-decoration: none;
+    color: #111;
+    background: transparent;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.review-filter-bar a.selected {
+    background: #e5d4ff;
+}
+
+.reviews-container {
+    padding-bottom: 100px; /* space so bottom review isn't hidden */
+}
+
+
+.review-filter-bar button {
+    padding: 8px 14px;
+    border-radius: 20px;
+    border: none;
+    background: transparent;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.review-filter-bar .selected {
+    background: #e5d4ff;
+}
+
+
+
+.card {
+    color: #000; /* force black text */
+}

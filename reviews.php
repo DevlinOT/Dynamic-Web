@@ -42,6 +42,7 @@ $reviews = $conn->query($sql)->fetch_all(MYSQLI_ASSOC);
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="icon" type="image/jpg" href="images/favicon.jpg">
     <meta charset="utf-8">
     <title>Reviews</title>
     <!-- make sure this path matches your actual file: project/css/style.css -->

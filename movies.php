@@ -79,10 +79,11 @@ $directors = distincts($conn, 'director');
     .pill { background:#eef2ff; color:#3730a3; padding:2px 8px; border-radius:999px; font-size:12px; }
     /* Nav (simple) */
     .nav { display:flex; gap:16px; justify-content:flex-end; padding:12px 16px; }
-    .nav a { color:#111; text-decoration:none; }
+    .nav a { color:#ffffff; text-decoration:none; }
     .nav .active { background:#f1f5f9; padding:6px 10px; border-radius:8px; }
     @media (max-width: 860px){ .page { grid-template-columns: 1fr; } .filters{ position:static; display:grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap:12px; } .menu{ position:static; box-shadow:none; border:1px solid #e5e7eb; } }
   </style>
+  <link rel="icon" type="image/jpg" href="images/favicon.jpg">
 </head>
 <body>
 <?php include 'navbar.php'; ?>

@@ -9,12 +9,15 @@ $loggedInUser = $_SESSION['username'] ?? null;
   <meta charset="utf-8">
   <title>Movie/Game Hub</title>
   <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/jpg" href="images/favicon.jpg">
 </head>
 
 <body>
  
 
   <header class="topbar">
+    
+
     <div class="brand">🎬 Crossover Hub</div>
     <?php include 'navbar.php'; ?>
     <div class="userbox" id="userbox">
@@ -51,14 +54,96 @@ $loggedInUser = $_SESSION['username'] ?? null;
 
   <div class="popular">
     <div class="popular-label">Popular</div>
-    <div class="popular-grid">
-      <!-- placeholders; replace with real posters later -->
-      <div class="thumb"></div>
-      <div class="thumb"></div>
-      <div class="thumb"></div>
-      <div class="thumb"></div>
+
+    <div class="grid popular-grid">
+
+        <!-- 1 -->
+        <article class="card">
+            <img src="images/lastofusM.jpg" alt="">
+            <div class="meta">
+                <strong>The Last of Us</strong>
+                <p class="muted">TV series adaptation of the PlayStation classic.</p>
+                <div class="badges">
+                    <span>Drama</span>
+                    <span>2023</span>
+                    <span>HBO</span>
+                </div>
+            </div>
+        </article>
+
+        <!-- 2 -->
+        <article class="card">
+            <img src="images/sonicM.jpg" alt="">
+            <div class="meta">
+                <strong>Sonic the Hedgehog</strong>
+                <p class="muted">A super-fast blue hedgehog battles Dr. Robotnik.</p>
+                <div class="badges">
+                    <span>Family</span>
+                    <span>2020</span>
+                    <span>Theatrical</span>
+                </div>
+            </div>
+        </article>
+
+        <!-- 3 -->
+        <article class="card">
+            <img src="images/unchartedG.jpg" alt="">
+            <div class="meta">
+                <strong>Uncharted 4: A Thief’s End</strong>
+                <p class="muted">Nathan Drake’s final treasure-hunting adventure.</p>
+                <div class="badges">
+                    <span>Action-Adventure</span>
+                    <span>2016</span>
+                    <span>PlayStation</span>
+                </div>
+            </div>
+        </article>
+
+        <!-- 4 -->
+        <article class="card">
+            <img src="images/sonicG.jpg" alt="">
+            <div class="meta">
+                <strong>Sonic the Hedgehog (1991)</strong>
+                <p class="muted">The original fast-paced platforming sensation.</p>
+                <div class="badges">
+                    <span>Platformer</span>
+                    <span>1991</span>
+                    <span>Genesis</span>
+                </div>
+            </div>
+        </article>
+
+        <!-- 5 -->
+        <article class="card">
+            <img src="images/pickachuM.jpg" alt="">
+            <div class="meta">
+                <strong>Detective Pikachu</strong>
+                <p class="muted">A mystery adventure set in the Pokémon universe.</p>
+                <div class="badges">
+                    <span>Adventure</span>
+                    <span>2019</span>
+                    <span>Theatrical</span>
+                </div>
+            </div>
+        </article>
+
+        <!-- 6 -->
+        <article class="card">
+            <img src="images/tombraiderG.jpg" alt="">
+            <div class="meta">
+                <strong>Tomb Raider (2013)</strong>
+                <p class="muted">Lara Croft’s gritty origin reboot.</p>
+                <div class="badges">
+                    <span>Action-Adventure</span>
+                    <span>2013</span>
+                    <span>Multi-Platform</span>
+                </div>
+            </div>
+        </article>
+
     </div>
-  </div>
+</div>
+
 </section>
 
   </main>

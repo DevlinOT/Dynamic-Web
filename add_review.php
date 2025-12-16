@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             INSERT INTO reviews (user_id, movie_id, game_id, rating, review_text)
             VALUES (?, ?, ?, ?, ?)
         ");
-        // one of movie_id / game_id will be 0 →  convert 0 to NULL
+        // one of movie_id / game_id will be 0 → we convert 0 to NULL
         $m_id = $movie_id ?: null;
         $g_id = $game_id ?: null;
 

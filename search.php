@@ -39,24 +39,7 @@ if ($q !== '') {
     <link rel="icon" type="image/jpg" href="images/favicon.jpg">
     <link rel="stylesheet" href="css/style.css">
 
-    <!-- Inline styles (move to style.css later if required) -->
-    <style>
-        .results { max-width: 980px; margin: 24px auto; padding: 0 20px; }
-        .res-grid { display:grid; grid-template-columns: repeat(auto-fill,minmax(220px,1fr)); gap:18px; }
-        .card { border:1px solid #e5e7eb; border-radius:12px; overflow:hidden; background:#fff; }
-        .card img { width:100%; height:300px; object-fit:cover; display:block; }
-        .card .meta { padding:10px 12px; font-size:14px; color:#374151; }
-        .pill {
-            display:inline-block;
-            font-size:12px;
-            background:#eef2ff;
-            color:#3730a3;
-            padding:3px 8px;
-            border-radius:9999px;
-            margin-bottom:6px;
-        }
-        .actions { margin-top:10px; }
-    </style>
+   
 </head>
 <body>
 

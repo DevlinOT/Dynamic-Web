@@ -44,7 +44,7 @@ if ($exists) {
   exit;
 }
 
-// Hash password (PASSWORD_DEFAULT per lecture)
+// Hash password 
 $hash = password_hash($password, PASSWORD_DEFAULT);
 
 $stmt = $conn->prepare('INSERT INTO Users (username, email, password_hash) VALUES (?,?,?)');

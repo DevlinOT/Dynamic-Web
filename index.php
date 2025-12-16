@@ -1,6 +1,45 @@
 <?php
 session_start();
+require __DIR__ . '/db.php';
+
 $loggedInUser = $_SESSION['username'] ?? null;
+
+// --- DB-powered Popular (6 items, movies + games) ---
+$popular = [];
+$sql = "
+  SELECT * FROM (
+    SELECT
+      'movie' AS type,
+      movie_id AS id,
+      title,
+      genre,
+      release_year,
+      platform,
+      image_url,
+      description
+    FROM Movies
+
+    UNION ALL
+
+    SELECT
+      'game' AS type,
+      game_id AS id,
+      title,
+      genre,
+      release_year,
+      platform,
+      image_url,
+      description
+    FROM Games
+  ) AS all_items
+  ORDER BY release_year DESC, title ASC
+  LIMIT 6
+";
+
+$res = $conn->query($sql);
+while ($row = $res->fetch_assoc()) {
+  $popular[] = $row;
+}
 ?>
 
 <!DOCTYPE html>
@@ -8,178 +47,121 @@ $loggedInUser = $_SESSION['username'] ?? null;
 <head>
   <meta charset="utf-8">
   <title>Movie/Game Hub</title>
+
+  <link rel="icon" type="image/png" href="images/favicon.png">
   <link rel="stylesheet" href="css/style.css">
-  <link rel="icon" type="image/jpg" href="images/favicon.jpg">
 </head>
 
 <body>
- 
 
-  <header class="topbar">
-    
+<header class="topbar">
+  <div class="brand">🎬 Crossover Hub</div>
 
-    <div class="brand">🎬 Crossover Hub</div>
-    <?php include 'navbar.php'; ?>
-    <div class="userbox" id="userbox">
-      <?php if ($loggedInUser): ?>
-        <span>Hi, <strong><?= htmlspecialchars($loggedInUser) ?></strong></span>
-        <a class="btn" onclick="logout()">Logout</a>
-      <?php else: ?>
-        <button class="btn" onclick="openLogin()">Login</button>
-      <?php endif; ?>
-    </div>
-  </header>
+  <?php include 'navbar.php'; ?>
 
-  <main class="content">
-    <h1>Welcome<?= $loggedInUser ? ', ' . htmlspecialchars($loggedInUser) : '' ?>!</h1>
-    <p>Browse movies and games. Link pairs. Post reviews.</p>
+  <div class="userbox" id="userbox">
+    <?php if ($loggedInUser): ?>
+      <span>Hi, <strong><?= htmlspecialchars($loggedInUser) ?></strong></span>
+      <a class="btn" onclick="logout()">Logout</a>
+    <?php else: ?>
+      <button class="btn" onclick="openLogin()">Login</button>
+    <?php endif; ?>
+  </div>
+</header>
+
+<main class="content">
+  <h1>Welcome<?= $loggedInUser ? ', ' . htmlspecialchars($loggedInUser) : '' ?>!</h1>
+  <p>Browse movies and games. Link pairs. Post reviews.</p>
+
   <section class="search-section">
-  <h1 class="search-title">Search</h1>
+    <h1 class="search-title">Search</h1>
 
-  <form class="searchbar" action="search.php" method="get" role="search" aria-label="Site search">
-    <span class="icon" aria-hidden="true">
-      <!-- magnifying glass (inline SVG, no external libs) -->
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-        <circle cx="11" cy="11" r="7.5" stroke="currentColor" stroke-width="2"/>
-        <line x1="16.5" y1="16.5" x2="22" y2="22" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-      </svg>
-    </span>
-    <input
-      type="text"
-      name="q"
-      placeholder="Search"
-      aria-label="Search"
-    />
-  </form>
+    <form class="searchbar" action="search.php" method="get" role="search" aria-label="Site search">
+      <span class="icon" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <circle cx="11" cy="11" r="7.5" stroke="currentColor" stroke-width="2"/>
+          <line x1="16.5" y1="16.5" x2="22" y2="22" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </span>
 
-  <div class="popular">
-    <div class="popular-label">Popular</div>
+      <input
+        type="text"
+        name="q"
+        placeholder="Search"
+        aria-label="Search"
+        autocomplete="off"
+      />
+    </form>
 
-    <div class="grid popular-grid">
+    <div class="popular">
+      <div class="popular-label">New</div>
 
-        <!-- 1 -->
-        <article class="card">
-            <img src="images/lastofusM.jpg" alt="">
+      <div class="grid popular-grid">
+        <?php foreach ($popular as $p): ?>
+          <article class="card">
+            <img
+              src="<?= htmlspecialchars($p['image_url'] ?: 'images/placeholder.jpg') ?>"
+              alt=""
+            >
             <div class="meta">
-                <strong>The Last of Us</strong>
-                <p class="muted">TV series adaptation of the PlayStation classic.</p>
-                <div class="badges">
-                    <span>Drama</span>
-                    <span>2023</span>
-                    <span>HBO</span>
-                </div>
-            </div>
-        </article>
+              <strong>
+                <?= htmlspecialchars($p['title']) ?>
+              </strong>
 
-        <!-- 2 -->
-        <article class="card">
-            <img src="images/sonicM.jpg" alt="">
-            <div class="meta">
-                <strong >Sonic the Hedgehog</strong>
-                <p class="muted">A super-fast blue hedgehog battles Dr. Robotnik.</p>
-                <div class="badges">
-                    <span>Family</span>
-                    <span>2020</span>
-                    <span>Theatrical</span>
-                </div>
-            </div>
-        </article>
+              <p class="muted">
+                <?= htmlspecialchars($p['description'] ?: '') ?>
+              </p>
 
-        <!-- 3 -->
-        <article class="card">
-            <img src="images/unchartedG.jpg" alt="">
-            <div class="meta">
-                <strong>Uncharted 4: A Thief’s End</strong>
-                <p class="muted">Nathan Drake’s final treasure-hunting adventure.</p>
-                <div class="badges">
-                    <span>Action-Adventure</span>
-                    <span>2016</span>
-                    <span>PlayStation</span>
-                </div>
+              <div class="badges">
+                <span><?= htmlspecialchars($p['type']) ?></span>
+                <?php if (!empty($p['genre'])): ?><span><?= htmlspecialchars($p['genre']) ?></span><?php endif; ?>
+                <?php if (!empty($p['release_year'])): ?><span><?= htmlspecialchars($p['release_year']) ?></span><?php endif; ?>
+                <?php if (!empty($p['platform'])): ?><span><?= htmlspecialchars($p['platform']) ?></span><?php endif; ?>
+              </div>
             </div>
-        </article>
-
-        <!-- 4 -->
-        <article class="card">
-            <img src="images/sonicG.jpg" alt="">
-            <div class="meta">
-                <strong>Sonic the Hedgehog (1991)</strong>
-                <p class="muted">The original fast-paced platforming sensation.</p>
-                <div class="badges">
-                    <span>Platformer</span>
-                    <span>1991</span>
-                    <span>Genesis</span>
-                </div>
-            </div>
-        </article>
-
-        <!-- 5 -->
-        <article class="card">
-            <img src="images/pickachuM.jpg" alt="">
-            <div class="meta">
-                <strong>Detective Pikachu</strong>
-                <p class="muted">A mystery adventure set in the Pokémon universe.</p>
-                <div class="badges">
-                    <span>Adventure</span>
-                    <span>2019</span>
-                    <span>Theatrical</span>
-                </div>
-            </div>
-        </article>
-
-        <!-- 6 -->
-        <article class="card">
-            <img src="images/tombraiderG.jpg" alt="">
-            <div class="meta">
-                <strong>Tomb Raider (2013)</strong>
-                <p class="muted">Lara Croft’s gritty origin reboot.</p>
-                <div class="badges">
-                    <span>Action-Adventure</span>
-                    <span>2013</span>
-                    <span>Multi-Platform</span>
-                </div>
-            </div>
-        </article>
-
+          </article>
+        <?php endforeach; ?>
+      </div>
     </div>
-</div>
 
-</section>
+  </section>
+</main>
 
-  </main>
+<!-- Backdrop -->
+<div id="backdrop" class="backdrop" onclick="closeLogin()"></div>
 
-  <!-- Backdrop -->
-  <div id="backdrop" class="backdrop" onclick="closeLogin()"></div>
-
-  <!-- Modal -->
-  <div id="login_modal" class="modal">
-    <div class="modal_header">
-      <h2 id="modal_title">Login</h2>
-      <button class="close_btn" onclick="closeLogin()">×</button>
-    </div>
-    <div class="modal_body" id="modal_body">
-      <!-- Default = Login form -->
-      <form id="login_form" onsubmit="return loginUser(event)">
-        <div class="field">
-          <label>Username or Email</label>
-          <input name="login" required>
-        </div>
-        <div class="field">
-          <label>Password</label>
-          <input type="password" name="password" required>
-        </div>
-        <div id="login_response" class="response"></div>
-        <div class="actions">
-          <button type="submit" class="btn">Log In</button>
-          <button type="button" class="link_btn" onclick="switchToCreate()">Create account</button>
-        </div>
-      </form>
-    </div>
+<!-- Modal -->
+<div id="login_modal" class="modal">
+  <div class="modal_header">
+    <h2 id="modal_title">Login</h2>
+    <button class="close_btn" onclick="closeLogin()">×</button>
   </div>
 
-  <script src="js/utils.js"></script>
+  <div class="modal_body" id="modal_body">
+    <form id="login_form" onsubmit="return loginUser(event)">
+      <div class="field">
+        <label>Username or Email</label>
+        <input name="login" required>
+      </div>
 
-  <script>
+      <div class="field">
+        <label>Password</label>
+        <input type="password" name="password" required>
+      </div>
+
+      <div id="login_response" class="response"></div>
+
+      <div class="actions">
+        <button type="submit" class="btn">Log In</button>
+        <button type="button" class="link_btn" onclick="switchToCreate()">Create account</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="js/utils.js"></script>
+
+<script>
 const searchInput = document.querySelector('.searchbar input');
 const dropdown = document.createElement('ul');
 dropdown.className = 'search-dropdown';
@@ -194,6 +176,7 @@ searchInput.addEventListener('input', async () => {
   if (!q) return;
 
   controller = new AbortController();
+
   try {
     const res = await fetch(`search_suggest.php?q=${encodeURIComponent(q)}`, {
       signal: controller.signal
@@ -206,7 +189,6 @@ searchInput.addEventListener('input', async () => {
       const li = document.createElement('li');
       li.textContent = title;
       li.addEventListener('mousedown', () => {
-        // Fill input and submit form when clicked
         searchInput.value = title;
         searchInput.closest('form').submit();
       });
@@ -217,7 +199,6 @@ searchInput.addEventListener('input', async () => {
   }
 });
 
-// Hide dropdown when clicking elsewhere
 document.addEventListener('click', (e) => {
   if (!searchInput.contains(e.target) && !dropdown.contains(e.target)) {
     dropdown.innerHTML = '';

@@ -65,8 +65,8 @@ body { margin: 0; background: #0f1115; color: #e9edf1; }
   border-radius: 9999px;
   border: 1px solid #e5e7eb;
   background: #fff;
-  padding: 0 48px;              /* space for icon + room on right */
-  text-align: center;           /* centered placeholder like screenshot */
+  padding: 0 48px;             
+  text-align: center;           
   font-size: 16px;
   outline: none;
   box-shadow: 0 1px 2px rgba(0,0,0,0.03);
@@ -271,8 +271,8 @@ body { margin: 0; background: #0f1115; color: #e9edf1; }
 
 /* Bottom filter bar */
 .review-filter-bar {
-    position: fixed;        /* ← keeps it on screen */
-    bottom: 0;              /* stick to bottom */
+    position: fixed;        
+    bottom: 0;              
     left: 0;
     right: 0;
 
@@ -328,3 +328,239 @@ body { margin: 0; background: #0f1115; color: #e9edf1; }
 .card {
     color: #000; /* force black text */
 }
+
+
+.filters { 
+  position: sticky; 
+  top: 16px; 
+  height: fit-content; 
+}
+
+/* filter dropdown using <details> */
+details.filter { 
+  position: relative; 
+  margin-bottom: 14px; 
+}
+
+details.filter > summary {
+  list-style: none;
+  cursor: pointer;
+  background: #0b0b0b;
+  color: #fff;
+  border-radius: 999px;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  border: 1px solid #000;
+  font-weight: 600;
+}
+
+details.filter > summary::-webkit-details-marker { 
+  display: none; 
+}
+
+details.filter[open] > summary { 
+  outline: 2px solid #6b5bff33; 
+}
+
+.chev { 
+  font-size: 12px; 
+  opacity: 0.8; 
+}
+
+/* dropdown menu */
+.menu {
+  position: absolute;
+  left: 0;
+  top: 48px;
+  z-index: 20;
+  background: #fff;
+  color: #111;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+  min-width: 220px;
+  max-height: 260px;
+  overflow: auto;
+  padding: 6px;
+}
+
+.menu a {
+  display: block;
+  padding: 8px 10px;
+  border-radius: 8px;
+  color: #111;
+  text-decoration: none;
+}
+
+.menu a:hover { 
+  background: #f3f4f6; 
+}
+
+.menu .clear { 
+  color: #6b7280; 
+}
+
+/* badges row used on movies/games cards */
+.bar {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+
+.pill {
+  background: #eef2ff;
+  color: #3730a3;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+}
+
+/* Responsive for page+filters dropdown */
+@media (max-width: 860px) {
+  .page { grid-template-columns: 1fr; }
+  .filters {
+    position: static;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+  .menu {
+    position: static;
+    box-shadow: none;
+    border: 1px solid #e5e7eb;
+  }
+}
+
+
+/* Layout */
+.page {
+  max-width: 1100px;
+  margin: 20px auto;
+  padding: 0 16px;
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 24px;
+}
+
+/* Filters (left) */
+.filters {
+  position: sticky;
+  top: 16px;
+  height: fit-content;
+}
+
+details.filter { position: relative; margin-bottom: 14px; }
+
+details.filter > summary {
+  list-style: none;
+  cursor: pointer;
+  background: #0b0b0b;
+  color: #fff;
+  border-radius: 999px;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  border: 1px solid #000;
+  font-weight: 600;
+}
+
+details.filter[open] > summary { outline: 2px solid #6b5bff33; }
+details.filter > summary::-webkit-details-marker { display: none; }
+
+.chev { font-size: 12px; opacity: 0.8; }
+
+/* Dropdown menu */
+.menu {
+  position: absolute;
+  left: 0;
+  top: 48px;
+  z-index: 20;
+  background: #fff;
+  color: #111;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+  min-width: 220px;
+  max-height: 260px;
+  overflow: auto;
+  padding: 6px;
+}
+
+.menu a {
+  display: block;
+  padding: 8px 10px;
+  border-radius: 8px;
+  color: #111;
+  text-decoration: none;
+}
+
+.menu a:hover { background: #f3f4f6; }
+.menu .clear { color: #6b7280; }
+
+/* Cards grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  background: #eee;
+  display: block;
+}
+
+.card .meta { padding: 12px; }
+
+.muted { color: #6b7280; font-size: 13px; }
+
+.bar {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+
+
+.pill {
+  background: #ecfeff;
+  color: #0e7490;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+}
+
+/* Responsive */
+@media (max-width: 860px) {
+  .page { grid-template-columns: 1fr; }
+  .filters {
+    position: static;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+  .menu {
+    position: static;
+    box-shadow: none;
+    border: 1px solid #e5e7eb;
+  }
+}
+
+
+
+

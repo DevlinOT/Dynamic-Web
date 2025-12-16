@@ -8,7 +8,7 @@
 <body>
 
 <?php
-$conn = new mysqli("localhost", "root", "", NULL, 3307);
+$conn = new mysqli("localhost", "root", "root", NULL, 8889);
 
 $dbname = "movie_game_db";
 
@@ -23,7 +23,7 @@ $conn->query($sql);
 $conn->close();
 
 // Reconnect to new DB
-$conn = new mysqli("localhost", "root", "", $dbname, 3307);
+$conn = new mysqli("localhost", "root", "root", $dbname, 8889);
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
